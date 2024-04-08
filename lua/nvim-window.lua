@@ -53,6 +53,8 @@ local config = {
 
   -- The border style to use for the floating window.
   border = 'single',
+
+  disable_hint = false,
 }
 
 -- Returns a table that maps the hint keys to their corresponding windows.
@@ -110,6 +112,10 @@ end
 -- Opens all the floating windows in (roughly) the middle of every window.
 local function open_floats(mapping)
   local floats = {}
+
+  if config.disable_hint then
+    return floats
+  end
 
   for key, window in pairs(mapping) do
     local bufnr = api.nvim_create_buf(false, true)
